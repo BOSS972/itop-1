@@ -65,7 +65,7 @@ function plugin_version_itop() {
                  'version'        => '1.0',
                  'author'         => "<a href='www.teclib.com'>TECLIB'</a>",
                  'homepage'       => 'https://github.com/teclib/itop',
-                 'license'        => "MIT",                 
+                 'license'        => "MIT",
                  'minGlpiVersion' => '9.1.1');
 }
 
