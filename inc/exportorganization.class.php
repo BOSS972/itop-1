@@ -50,16 +50,12 @@ class PluginItopExportOrganization extends PluginItopExportCommon
    }
 
    function getSQLQuery() {
-      $query = "SELECT ".$this->getItemUniqueID('e', 'Entity').",
-                     `e`.`name` AS `primary_key`,
-                     `e`.`name` AS `name`,
-                     CASE e.entities_id
-                     WHEN -1 THEN ''
-                     WHEN NOT NULL THEN
-                     ".PluginItopToolbox::getGlpiUniqueID($this->getGlpiServerID(),
-                                                          'Entity', 'e.entities_id')."
-                     END as `parent_id`
-              FROM `glpi_entities` AS `e`";
+      $query = "SELECT ".$this->getItemUniqueID('e1', 'Entity').",
+                     `e1`.`name` AS `primary_key`,
+                     `e1`.`name` AS `name`,
+                     `e2`.`name` AS `parent_id`            
+              FROM `glpi_entities` AS `e1`
+              LEFT JOIN `glpi_entities` AS `e2` ON `e2`.`id`= `e1`.`entities_id`";
       return $query;
    }
 }
