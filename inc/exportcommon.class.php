@@ -79,6 +79,16 @@ abstract class PluginItopExportCommon extends CommonDBTM {
       return $this->go();
    }
 
+   /**
+   * Perform transformation on raw data
+   *
+   * @param array $data row coming from GLPI DB
+   * @return array $data data transformed
+   */
+   function transformRawData($data) {
+      return $data;
+   }
+
    function go() {
       global $DB;
 
@@ -88,7 +98,7 @@ abstract class PluginItopExportCommon extends CommonDBTM {
          return array();
       } else {
          foreach ($DB->request($query) as $result) {
-            $data[] = $result;
+            $data[] = $this->transformRawData($result);
          }
          return PluginItopToolbox::filterData($data, $this->getFieldsToFilter());
       }
